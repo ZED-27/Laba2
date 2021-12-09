@@ -25,6 +25,32 @@ public class MainFrame extends JFrame {
 
     private int formulaID = 1;
 
+    public Double Calculate1(Double x, Double y, Double z) {
+        if (y == 0){
+            JOptionPane.showMessageDialog(getParent(),"y == 0", "Error", JOptionPane.ERROR_MESSAGE);
+            return 0.0;
+        }
+        if (z == 0){
+            JOptionPane.showMessageDialog(getParent(),"z == 0", "Error", JOptionPane.ERROR_MESSAGE);
+            return 0.0;
+        }
+
+        return (Math.sin(Math.PI * y * y) + Math.log(y*y))/(Math.sin(Math.PI*z*z)+Math.sin(x)+Math.log(z*z)+x*x+Math.exp(Math.cos(z*x)));
+    }
+
+    public Double Calculate2(Double x, Double y, Double z) {
+        if (z == -1){
+            JOptionPane.showMessageDialog(getParent(),"z == -1", "Error", JOptionPane.ERROR_MESSAGE);
+            return 0.0;
+        }
+        if (x == 0){
+            JOptionPane.showMessageDialog(getParent(),"x == 0", "Error", JOptionPane.ERROR_MESSAGE);
+            return 0.0;
+        }
+
+        return Math.pow((Math.cos(Math.exp(y)) + Math.exp(y*y)) + Math.pow(1/x,1/2),1/4)/Math.pow((Math.cos(Math.PI*z*z*z)+Math.log((1+z)*(1+z))),Math.sin(y));
+    }
+
     public MainFrame() {
         super("Вычисление по формулам");
         setSize(WIDTH, HEIGHT);
@@ -127,6 +153,72 @@ public class MainFrame extends JFrame {
 
         textFieldResult.setBounds(270,400,400,30);
         jLabel.add(textFieldResult);
+
+
+
+        JButton calculate = new JButton("Посчитать");
+        calculate.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Double temp;
+                if (formulaID == 1) {
+                    temp = Calculate1(Double.parseDouble(textFieldX.getText()),Double.parseDouble(textFieldY.getText()),Double.parseDouble(textFieldZ.getText()) );
+                }
+                else{
+                    temp = Calculate2(Double.parseDouble(textFieldX.getText()),Double.parseDouble(textFieldY.getText()),Double.parseDouble(textFieldZ.getText()) );
+                }
+                textFieldResult.setText(temp.toString());
+            }
+        });
+        calculate.setBounds(300,200,100,30);
+        jLabel.add(calculate);
+
+        JButton clear = new JButton("Очистить");
+        clear.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                textFieldResult.setText("0");
+                textFieldX.setText("0");
+                textFieldY.setText("0");
+                textFieldZ.setText("0");
+            }
+        });
+        clear.setBounds(550,200,100,30);
+        jLabel.add(clear);
+
+
+
+        JButton MPlus = new JButton("M+");
+        MPlus.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                Double temp = Double.parseDouble(textFieldResult.getText())+activeVariable;
+                textFieldResult.setText(temp.toString());
+            }
+        });
+        MPlus.setBounds(400,250,70,70);
+        jLabel.add(MPlus);
+
+        JButton MC = new JButton("MC");
+        MC.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if (activeVariableID == 1)
+                {
+                    textFieldX.setText("0");
+                }
+                else if (activeVariableID == 2)
+                {
+                    textFieldY.setText("0");
+                }
+                else
+                {
+                    textFieldZ.setText("0");
+                }
+            }
+        });
+        MC.setBounds(520,250,70,70);
+        jLabel.add(MC);
     }
 
     public static void main(String args[])
