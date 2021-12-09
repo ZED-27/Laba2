@@ -63,6 +63,70 @@ public class MainFrame extends JFrame {
         formulas.add(radioButtonFormula2);
         jLabel.add(radioButtonFormula1);
         jLabel.add(radioButtonFormula2);
+
+
+
+        JLabel labelForX = new JLabel("X:");
+        labelForX.setBounds(245,140,30,30);
+        jLabel.add(labelForX);
+        textFieldX.setBounds(275,140, 100,30);
+        jLabel.add(textFieldX);
+
+        JLabel labelForY = new JLabel("Y:");
+        labelForY.setBounds(405,140,30,30);
+        jLabel.add(labelForY);
+        textFieldY.setBounds(435,140, 100,30);
+        jLabel.add(textFieldY);
+
+        JLabel labelForZ = new JLabel("Z:");
+        labelForZ.setBounds(565,140,30,30);
+        jLabel.add(labelForZ);
+        textFieldZ.setBounds(595,140, 100,30);
+        jLabel.add(textFieldZ);
+
+
+
+        ButtonGroup activeVariableButtons = new ButtonGroup();
+        JRadioButton activeVariable1  = new JRadioButton("Переменная 1");
+        activeVariable1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                activeVariable = Double.parseDouble(textFieldX.getText());
+                activeVariableID = 1;
+            }
+        });
+        activeVariableButtons.add(activeVariable1);
+        activeVariable1.setBounds(245,170,150,20);
+        jLabel.add(activeVariable1);
+
+        JRadioButton activeVariable2  = new JRadioButton("Переменная 2");
+        activeVariable2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                activeVariable = Double.parseDouble(textFieldY.getText());
+                activeVariableID = 2;
+            }
+        });
+        activeVariableButtons.add(activeVariable2);
+        activeVariable2.setBounds(405,170,150,20);
+        jLabel.add(activeVariable2);
+
+        JRadioButton activeVariable3  = new JRadioButton("Переменная 3");
+        activeVariable3.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                activeVariable = Double.parseDouble(textFieldZ.getText());
+                activeVariableID = 3;
+            }
+        });
+        activeVariableButtons.add(activeVariable3);
+        activeVariable3.setBounds(565,170,150,20);
+        jLabel.add(activeVariable3);
+
+
+
+        textFieldResult.setBounds(270,400,400,30);
+        jLabel.add(textFieldResult);
     }
 
     public static void main(String args[])
